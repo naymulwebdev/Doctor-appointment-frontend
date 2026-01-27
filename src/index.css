@@ -1,9 +1,23 @@
-.design{
-    clip-path: polygon(0 0, 100% 0%, 100% 69%, 0 100%)
-}
+
 
 :root{
     --color-primary:#34C9B6;
     --color-secondary:#C7F2FF;
 
+}
+
+.cardiInfo{
+    transition: all 0.3s linear;
+}
+.cardCircle{
+    transition: all 0.3s linear;
+}
+
+.cardiInfo:hover{
+    background-color: var(--color-secondary) ;
+    
+}
+.cardiInfo:hover .cardCircle{
+    background-color: white ;
+    
 }
