@@ -2,7 +2,7 @@ import React from 'react';
 
 const PrimaryButton = ({children}) => {
     return (
-        <div className='bg-purple-500 p-5 m-2 w-auto'>
+        <div className='bg-primary rounded-lg p-5 w-auto text-center'>
             <button>{children}</button>
         </div>
     );
