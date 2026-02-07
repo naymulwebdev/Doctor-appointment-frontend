@@ -3,6 +3,7 @@
 :root{
     --color-primary:#34C9B6;
     --color-secondary:#C7F2FF;
+    --color-nutel:#757373;
 
 }
 
@@ -20,4 +21,8 @@
 .cardiInfo:hover .cardCircle{
     background-color: white ;
     
+}
+
+.footer-shape{
+    clip-path: polygon(100% 0%, 100% 100%, 0% 100%, 0% 38%);
 }

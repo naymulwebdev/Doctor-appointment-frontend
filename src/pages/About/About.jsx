@@ -1,9 +1,12 @@
 import React from 'react';
+import ExpertTeams from '../Home/ExpertTeams/ExpertTeams';
+import Infocards from '../Home/Infocards/Infocards';
 
 const About = () => {
     return (
         <div>
-            <h1>about page</h1>
+            <Infocards></Infocards>
+            <ExpertTeams ></ExpertTeams>
         </div>
     );
 };

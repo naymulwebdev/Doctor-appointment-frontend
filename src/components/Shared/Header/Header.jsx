@@ -1,13 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../../context/UserContext";
 
 const Header = () => {
+
+  //const {name} = useContext(AuthContext)
 
   const menuItems = <>
     <li> <Link to="/"> Home</Link></li>
     <li> <Link to="/about"> About</Link></li>
-    <li> <Link to="/service"> Service</Link></li>
+    <li> <Link to="/services"> Service</Link></li>
     <li> <Link to="/contact"> Contact</Link></li>
+    <li> <Link to="/sign-up"> Register</Link></li>
+    {/* <li> <Link to="/sign-up">{name}</Link></li> */}
   </>
   return (
     <div>
