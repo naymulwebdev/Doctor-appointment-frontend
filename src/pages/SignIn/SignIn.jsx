@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { js } from '@eslint/js';
+import { AuthContext } from "../../context/UserContext";
+import toast from "react-hot-toast";
 
 const SignIn = () => {
+
+  const {signInUser} = useContext(AuthContext)
   const {
     register,
     handleSubmit,
@@ -12,6 +16,15 @@ const SignIn = () => {
 
   const handleUserLogin = (data) => {
     console.log(data);
+    signInUser(data?.email,data?.password)
+    .then(result => {
+      const user = result.user;
+      
+      toast.success("Successfully User login 🥰")
+    })
+    .then(err=>{
+      console.log(err);
+    })
   };
 
   return (
@@ -69,16 +82,16 @@ const SignIn = () => {
           <div className="mt-2">
             <input
               type="submit"
-              className="input w-full bg-primary text-white"
+              className="input w-full bg-primary text-white cursor-pointer"
             />
           </div>
         </form>
 
         <div className="grid grid-cols-2 gap-3 mt-3">
-          <button className="input w-full bg-primary text-white">
+          <button className="input w-full bg-primary text-white cursor-pointer">
             Continue with Google
           </button>
-          <button className="input w-full bg-primary text-white">
+          <button className="input w-full bg-primary text-white cursor-pointer">
             Continue with Github
           </button>
         </div>

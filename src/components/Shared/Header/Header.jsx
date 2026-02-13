@@ -1,18 +1,27 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../context/UserContext";
+import Loading from "../Loading";
 
 const Header = () => {
 
-  //const {name} = useContext(AuthContext)
+  const {user,logOut,userLoading} = useContext(AuthContext)
+
+  if(userLoading){
+    return <Loading></Loading>
+  }
 
   const menuItems = <>
     <li> <Link to="/"> Home</Link></li>
     <li> <Link to="/about"> About</Link></li>
     <li> <Link to="/services"> Service</Link></li>
     <li> <Link to="/contact"> Contact</Link></li>
-    <li> <Link to="/sign-up"> Register</Link></li>
-    {/* <li> <Link to="/sign-up">{name}</Link></li> */}
+    {
+      user?.email ? <li> <button onClick={logOut}> Sing Out</button></li> : <li> <Link to="/sign-up"> Register</Link></li>
+    }
+    {
+      user?.email && <li> <Link to="/dashboard">Dashboard</Link></li>  
+    }
   </>
   return (
     <div>

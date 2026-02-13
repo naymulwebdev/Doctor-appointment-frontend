@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import { js } from '@eslint/js';
+import { js } from "@eslint/js";
+import { AuthContext } from "../../context/UserContext";
+import toast from "react-hot-toast";
 
 const SignUp = () => {
+  const { createUser, updataUser } = useContext(AuthContext);
   const {
     register,
     handleSubmit,
@@ -12,7 +15,27 @@ const SignUp = () => {
 
   const handleUserRegistrarion = (data) => {
     console.log(data);
+    createUser(data?.email, data?.password)
+      .then((result) => {
+        const user = result.user;
+        const updatting = {
+          displayName: data?.name,
+        };
+        updataUser(updatting);
+        saveUser(data.name,data.email)
+
+        toast.success("Successfully User Created 🥰");
+      })
+      .then((err) => {
+        console.log(err);
+      });
   };
+
+  const saveUser = (name,email) => {
+    const user ={name:name,email:email}
+    //fetch("/") user post hobe
+
+  }
 
   return (
     <div className="mx-auto card shadow-2xl my-5 mt-10 w-96">
@@ -45,9 +68,7 @@ const SignUp = () => {
               type="email"
               {...register("email", {
                 required: "Email is required",
-              },
-              
-            )}
+              })}
               placeholder="type your email"
             />
             {errors.email && (
@@ -55,7 +76,6 @@ const SignUp = () => {
             )}
           </div>
 
-          
           {/* Password */}
           <div className="mt-2">
             <label className="label">Password</label>
@@ -64,15 +84,17 @@ const SignUp = () => {
               type="password"
               {...register("password", {
                 required: "Password is required",
-                minLength:{
-                  value:6,
-                  message:"password should be six characters",
+                minLength: {
+                  value: 6,
+                  message: "password should be six characters",
                 },
 
-               pattern:{
-                value: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,message:"password should be a special characters"
-               } ,},
-          )}
+                pattern: {
+                  value:
+                    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+                  message: "password should be a special characters",
+                },
+              })}
               placeholder="type your password"
             />
             {errors.password && (
@@ -90,16 +112,16 @@ const SignUp = () => {
           <div className="mt-2">
             <input
               type="submit"
-              className="input w-full bg-primary text-white"
+              className="input w-full bg-primary text-white cursor-pointer"
             />
           </div>
         </form>
 
         <div className="grid grid-cols-2 gap-3 mt-3">
-          <button className="input w-full bg-primary text-white">
+          <button className="input w-full bg-primary text-white cursor-pointer">
             Continue with Google
           </button>
-          <button className="input w-full bg-primary text-white">
+          <button className="input w-full bg-primary text-white cursor-pointer">
             Continue with Github
           </button>
         </div>
